@@ -20,13 +20,11 @@ void division(const Polynome &dividende, // Le polynome qui est divise
     int degreeb = polynome_b.degre();
     std::vector<Polynome> vec_result;
     while (degreea >= degreeb) {
-        //obitent coefficient polynomes.
+        ///obitent coefficient polynomes.
         Rationnel coefficientA = polynome_a.coefficient(degreea);
         Rationnel coefficientB = polynome_b.coefficient(degreeb);
+        Rationnel coefficientX = coefficientA * coefficientB;
 
-//        double coefficientA_abs = std::abs(coefficientA.reel());
-//        double coefficientB_abs = std::abs(coefficientB.reel());
-        Rationnel coefficientX = coefficientA - coefficientA;
         if (coefficientX == 0) {
             coefficientX = Rationnel(1);
         }
@@ -52,7 +50,7 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         std::cout << "======================: " << std::endl;
         polynome_a = quotientRestant;
         reste = quotientRestant;
-        //update les degrees...
+        ///update les degrés
         degreea = polynome_a.degre();
         degreeb = polynome_b.degre();
 
@@ -60,7 +58,9 @@ void division(const Polynome &dividende, // Le polynome qui est divise
 
     for (int i = 0; i < vec_result.size(); i++) {
         quotient = quotient + vec_result.at(i);
+
     }
+    std::cout << "======================: " << quotient << std::endl;
     // INSEREZ VOTRE CODE ICI
 }
 
