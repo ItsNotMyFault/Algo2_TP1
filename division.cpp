@@ -24,28 +24,29 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         Rationnel coefficientA = polynome_a.coefficient(degreea);
         Rationnel coefficientB = polynome_b.coefficient(degreeb);
 
-        double coefficientA_abs = std::abs(coefficientA.reel());
-        double coefficientB_abs = std::abs(coefficientB.reel());
-        Rationnel coefficientX = coefficientA_abs - coefficientB_abs;
+//        double coefficientA_abs = std::abs(coefficientA.reel());
+//        double coefficientB_abs = std::abs(coefficientB.reel());
+        Rationnel coefficientX = coefficientA - coefficientA;
+        if (coefficientX == 0) {
+            coefficientX = Rationnel(1);
+        }
         std::cout << "coefficientA: " << coefficientA << std::endl;
         std::cout << "coefficientB: " << coefficientB << std::endl;
         std::cout << "coefficientX: " << coefficientX << std::endl;
         //Création du polynome multiplicateur.
         int degreeX = degreea - degreeb;
         std::vector<Rationnel> vec_rationnels_x(degreeX + 1, Rationnel(0));
-        Rationnel coefficientQuotientX;
-        coefficientQuotientX = Rationnel(coefficientX);
-        vec_rationnels_x[degreeX] = coefficientQuotientX;
+        vec_rationnels_x[degreeX] = coefficientX;
         Polynome polynome_x(vec_rationnels_x);
 
         vec_result.push_back(polynome_x);
         std::cout << "polynome_x: " << polynome_x << std::endl;
         ///création du polynome à sosutraire
-        Polynome quotient_a_soustraire = polynome_x * polynome_b;
+        Polynome polynome_a_soustraire = polynome_x * polynome_b;
 
-        std::cout << "quotient_a_soustraire: " << quotient_a_soustraire << std::endl;
+        std::cout << "polynome_a_soustraire: " << polynome_a_soustraire << std::endl;
         ///création polynome restant apprès soustraction
-        Polynome quotientRestant = polynome_a - quotient_a_soustraire;
+        Polynome quotientRestant = polynome_a - polynome_a_soustraire;
         std::cout << "quotientRestant: " << quotientRestant << std::endl;
         ///Remplace polynome_a par le nouveau.
         std::cout << "======================: " << std::endl;
