@@ -169,18 +169,27 @@ bool test_statistique(unsigned int degre,
 }
 
 int main(void) {
-  test_instance_vue_en_classe();
-  test_avec_reste_nul();
-  test_division_par_un_entier();
-  test_plus_grand_commun_diviseur1();
-  test_plus_grand_commun_diviseur2();
 
-  // Un autre germe sera utilise lors de la correction
-  // Aucun polynome de degre superieur a 7 ne sera teste, car il y a un risque de depassement d'entier.
-  test_statistique(7, 1000, 123, test_generique_division); 
-  // Un autre germe sera utilise lors de la correction
-  // Aucun polynome de degre superieur a 4 ne sera teste, car il y a un risque de depassement d'entier.
-  test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
+    std::cout << " MAIN ICI " << std::endl;
+
+    Rationnel coefficients_dividence[4] = {Rationnel(1), Rationnel(2), Rationnel(0), Rationnel(1)};
+    Polynome quotient_a(std::vector<Rationnel>(coefficients_dividence, coefficients_dividence + 4)); // x^3 + 2x + 1
+    Polynome quotient_b(std::vector<Rationnel>(2, Rationnel(1))); // x + 1
+    Polynome reste_a, reste_b;
+    division(quotient_a, quotient_b, reste_a, reste_b);
+
+//  test_instance_vue_en_classe();
+//  test_avec_reste_nul();
+//  test_division_par_un_entier();
+//  test_plus_grand_commun_diviseur1();
+//  test_plus_grand_commun_diviseur2();
+//
+//  // Un autre germe sera utilise lors de la correction
+//  // Aucun polynome de degre superieur a 7 ne sera teste, car il y a un risque de depassement d'entier.
+//  test_statistique(7, 1000, 123, test_generique_division);
+//  // Un autre germe sera utilise lors de la correction
+//  // Aucun polynome de degre superieur a 4 ne sera teste, car il y a un risque de depassement d'entier.
+//  test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
   
   return 0;
 }
