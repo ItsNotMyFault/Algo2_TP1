@@ -114,18 +114,11 @@ Polynome operator-(const Polynome &a, const Polynome &b) {
 // Complexite: Theta(d^2) ou d est le plus grand degre entre les polynomes a et b
 Polynome operator*(const Polynome &a, const Polynome &b) {
     std::vector<Rationnel> coefficients(a.degre() + b.degre() + 1, Rationnel(0));
-    std::cout << "  arr-coefficients: " << coefficients << std::endl;
-    std::cout << "  degree,a: " << a.degre() << std::endl;
-    std::cout << "  degree-b: " << b.degre()+1 << std::endl;
-    std::cout << "  degree-sums: " << a.degre() + b.degre() + 1 << std::endl;
     for (unsigned int i = 0; i < coefficients.size(); i++) {
         for (unsigned int j = 0; j <= i; j++) {
             coefficients[i] = coefficients[i] + a.coefficient(j) * b.coefficient(i - j);
-            std::cout << "  coefficients-i: " << coefficients[i] << std::endl;
         }
     }
-    std::cout << "  APRÈS MULTIPLICATION: " << Polynome(coefficients) << std::endl;
-    std::cout << " =========================== " << std::endl;
     return Polynome(coefficients);
 }
 
