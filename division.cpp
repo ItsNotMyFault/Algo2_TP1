@@ -23,7 +23,7 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         ///obitent coefficient polynomes.
         Rationnel coefficientA = polynome_a.coefficient(degreea);
         Rationnel coefficientB = polynome_b.coefficient(degreeb);
-        Rationnel coefficientX = coefficientA * coefficientB;
+        Rationnel coefficientX = coefficientA / coefficientB;
 
         if (coefficientX == 0) {
             coefficientX = Rationnel(1);
@@ -60,7 +60,8 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         quotient = quotient + vec_result.at(i);
 
     }
-    std::cout << "======================: " << quotient << std::endl;
+    std::cout << "===========quotient========: " << quotient << std::endl;
+    std::cout << "===========reste===========: " << reste << std::endl;
     // INSEREZ VOTRE CODE ICI
 }
 
