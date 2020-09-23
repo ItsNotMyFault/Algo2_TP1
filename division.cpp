@@ -12,10 +12,8 @@ void division(const Polynome &dividende, // Le polynome qui est divise
     //DÉBUT DU VECTEUR : fin équation (full droite) => 1
     Polynome polynome_a = dividende;
     Polynome polynome_b = diviseur;
-
-    std::cout << "polynome_a: " << polynome_a << std::endl;
-    std::cout << "polynome_b: " << polynome_b << std::endl;
-
+    Rationnel rationnel0[1] = {Rationnel(0)};
+    Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 1)); //0
     int degreea = polynome_a.degre();
     int degreeb = polynome_b.degre();
     std::vector<Polynome> vec_result;
@@ -28,48 +26,56 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         if (coefficientX == 0) {
             coefficientX = Rationnel(1);
         }
-        std::cout << "coefficientA: " << coefficientA << std::endl;
-        std::cout << "coefficientB: " << coefficientB << std::endl;
-        std::cout << "coefficientX: " << coefficientX << std::endl;
-        //Création du polynome multiplicateur.
+        ///Création du polynome multiplicateur.
         int degreeX = degreea - degreeb;
         std::vector<Rationnel> vec_rationnels_x(degreeX + 1, Rationnel(0));
         vec_rationnels_x[degreeX] = coefficientX;
         Polynome polynome_x(vec_rationnels_x);
 
         vec_result.push_back(polynome_x);
-        std::cout << "polynome_x: " << polynome_x << std::endl;
         ///création du polynome à sosutraire
         Polynome polynome_a_soustraire = polynome_x * polynome_b;
-
-        std::cout << "polynome_a_soustraire: " << polynome_a_soustraire << std::endl;
         ///création polynome restant apprès soustraction
         Polynome quotientRestant = polynome_a - polynome_a_soustraire;
-        std::cout << "quotientRestant: " << quotientRestant << std::endl;
-        ///Remplace polynome_a par le nouveau.
-        std::cout << "======================: " << std::endl;
+        ///Remplace polynome_a par le nouveau. (si pas égale à 0)
         polynome_a = quotientRestant;
         reste = quotientRestant;
         ///update les degrés
         degreea = polynome_a.degre();
         degreeb = polynome_b.degre();
-
     }
 
     for (int i = 0; i < vec_result.size(); i++) {
         quotient = quotient + vec_result.at(i);
-
     }
-    std::cout << "===========quotient========: " << quotient << std::endl;
-    std::cout << "===========reste===========: " << reste << std::endl;
-    // INSEREZ VOTRE CODE ICI
 }
 
 
 Polynome plus_grand_commun_diviseur(const Polynome &a, const Polynome &b) {
     assert(a >= b);
     assert(a.degre() > 0 || a.coefficient(0).numerateur() != 0);
-
-    // INSEREZ VOTRE CODE ICI
-    return Polynome();
+    std::cout << "===========EXPRESSSION :[" << a << "] / [" << b << "]" << std::endl;
+    Polynome numerateur, denominateur, quotient, reste;
+    numerateur = a;
+    denominateur = b;
+    //Création de "zéro" en tant que polynome.
+    Rationnel rationnel0[2] = {Rationnel(0), Rationnel(0)};
+    Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 2)); //0
+    bool repeat = true;
+    int i = 0;
+    while (repeat) {
+        division(numerateur, denominateur, quotient, reste);
+        std::cout << "ROUND " << i << " => : Num/denom [" << a << "] / [" << b << "] = [" << quotient
+                  << "] avec reste = " << reste << std::endl;
+        if (reste == polynome0) {
+            repeat = false;
+        }
+        //effectue changement de variable.
+        numerateur = denominateur;
+        denominateur = reste;
+        i++;
+    }
+    std::cout << "RESULTAT : Num/denom [" << a << "] / [" << b << "] = [" << quotient << "] avec reste = " << reste
+              << std::endl;
+    return quotient;
 }
