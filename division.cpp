@@ -54,28 +54,34 @@ void division(const Polynome &dividende, // Le polynome qui est divise
 Polynome plus_grand_commun_diviseur(const Polynome &a, const Polynome &b) {
     assert(a >= b);
     assert(a.degre() > 0 || a.coefficient(0).numerateur() != 0);
-    std::cout << "===========EXPRESSSION :[" << a << "] / [" << b << "]" << std::endl;
-    Polynome numerateur, denominateur, quotient, reste;
+    Polynome numerateur, denominateur, quotient, reste, pgcd;
     numerateur = a;
     denominateur = b;
-    //Création de "zéro" en tant que polynome.
+    //Création de "zéro" et "un" en tant que polynome.
     Rationnel rationnel0[2] = {Rationnel(0), Rationnel(0)};
+    Rationnel rationnel1[1] = {Rationnel(1)};
     Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 2)); //0
+    Polynome polynome1(std::vector<Rationnel>(rationnel1, rationnel1 + 1)); //1
     bool repeat = true;
     int i = 0;
     while (repeat) {
         division(numerateur, denominateur, quotient, reste);
-        std::cout << "ROUND " << i << " => : Num/denom [" << a << "] / [" << b << "] = [" << quotient
-                  << "] avec reste = " << reste << std::endl;
-        if (reste == polynome0) {
+        if(reste.degre() < denominateur.degre()){
             repeat = false;
+            if (reste == polynome0) {
+                pgcd = quotient;
+            }else{
+                pgcd = polynome1;
+            }
         }
+
+
         //effectue changement de variable.
         numerateur = denominateur;
         denominateur = reste;
         i++;
     }
-    std::cout << "RESULTAT : Num/denom [" << a << "] / [" << b << "] = [" << quotient << "] avec reste = " << reste
-              << std::endl;
-    return quotient;
+//    std::cout << "RESULTAT : Num/denom [" << a << "] / [" << b << "] = [" << quotient << "] avec reste = " << reste
+//              << std::endl;
+    return pgcd;
 }
