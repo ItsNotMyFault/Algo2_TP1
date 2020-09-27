@@ -10,17 +10,24 @@ void division(const Polynome &dividende, // Le polynome qui est divise
     // (x^3 + 2x + 1) / (x + 1) = x^2 - x + 3 reste -2
     //FIN DU VECTEUR : début équation (full gauche) => x^3
     //DÉBUT DU VECTEUR : fin équation (full droite) => 1
+
     Polynome polynome_a = dividende;
     Polynome polynome_b = diviseur;
     Rationnel rationnel0[1] = {Rationnel(0)};
     Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 1)); //0
     int degreea = polynome_a.degre();
+    int initdegreea = polynome_a.degre();
     int degreeb = polynome_b.degre();
+
+    int i = 0;
     std::vector<Polynome> vec_result;
     while (degreea >= degreeb) {
         ///obitent coefficient polynomes.
         Rationnel coefficientA = polynome_a.coefficient(degreea);
         Rationnel coefficientB = polynome_b.coefficient(degreeb);
+        if (coefficientB == Rationnel(0)) {
+            coefficientB = 1;
+        }
         Rationnel coefficientX = coefficientA / coefficientB;
 
         if (coefficientX == 0) {
@@ -43,11 +50,15 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         ///update les degrés
         degreea = polynome_a.degre();
         degreeb = polynome_b.degre();
+        i++;
     }
-
+    std::cout << "valeur de initdegreea : " << initdegreea << std::endl;;
+    std::cout << "valeur de i : " << i << std::endl;;
     for (int i = 0; i < vec_result.size(); i++) {
         quotient = quotient + vec_result.at(i);
     }
+
+
 }
 
 
@@ -63,23 +74,24 @@ Polynome plus_grand_commun_diviseur(const Polynome &a, const Polynome &b) {
     Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 2)); //0
     Polynome polynome1(std::vector<Rationnel>(rationnel1, rationnel1 + 1)); //1
     bool repeat = true;
-    int i = 0;
     while (repeat) {
-        division(numerateur, denominateur, quotient, reste);
-        if(reste.degre() < denominateur.degre()){
+
+        if (denominateur != polynome0) {
+            division(numerateur, denominateur, quotient, reste);
+        } else {
+            quotient = polynome1;
+            reste = polynome0;
+        }
+        if (reste.degre() < denominateur.degre() || reste == polynome0) {
             repeat = false;
-            if (reste == polynome0) {
-                pgcd = quotient;
-            }else{
+            pgcd = quotient;
+            if (reste != polynome0) {
                 pgcd = polynome1;
             }
         }
-
-
         //effectue changement de variable.
         numerateur = denominateur;
-        denominateur = reste;
-        i++;
+        denominateur = reste;// le reste parfois est 0 mais je repeat quand même créant une division par 0.
     }
 //    std::cout << "RESULTAT : Num/denom [" << a << "] / [" << b << "] = [" << quotient << "] avec reste = " << reste
 //              << std::endl;
