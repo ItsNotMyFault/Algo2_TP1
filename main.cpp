@@ -4,6 +4,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cmath>
+#include <numeric>
 
 #include "division.hpp"
 #include "polynome.hpp"
@@ -147,6 +149,7 @@ bool test_statistique(unsigned int degre,
     std::vector<Rationnel> dividende(degre + 1);
     std::vector<Rationnel> diviseur((degre + 1) / 2);
     unsigned int score = 0;
+    unsigned int scorePossibleTotal = 0;
 
     for (unsigned instance_num = 0; instance_num < nb_instances; instance_num++) {
         for (std::vector<Rationnel>::iterator i = dividende.begin(); i != dividende.end(); i++) {
@@ -157,7 +160,7 @@ bool test_statistique(unsigned int degre,
             *i = Rationnel(1 + std::rand() % 3);
         }
         diviseur.back() = Rationnel(1 + std::rand() % 2);
-
+        scorePossibleTotal++;
         char tampon[100];
         snprintf(tampon, sizeof(tampon), "Test statistiques #%d", instance_num);
         if ((*fonction_test)(tampon, dividende, diviseur, null_stream)) {
@@ -169,36 +172,129 @@ bool test_statistique(unsigned int degre,
     return true;
 }
 
+int algoMin1(std::vector<int> vecteurA) {
+    int n = vecteurA.size();
+    int temp = 0;
+    if (n == 1) {
+        return vecteurA.at(0);
+    } else {
+        std::vector<int> vectorB = std::vector<int>(vecteurA);
+        vectorB.pop_back();
+        temp = algoMin1(vectorB);
+        if (temp <= vecteurA.at(n - 1)) {
+            return temp;
+        } else {
+            return vecteurA.at(n - 1);
+        }
+    }
+}
+
+int algoMin2(std::vector<int> vecteurA) {
+    int n = vecteurA.size();
+    int l = vecteurA.at(0);
+    int r = vecteurA.at(n - 1);
+    int temp1 = 0;
+    int temp2 = 0;
+    if (l == r) {
+        return vecteurA.at(l);
+    } else {
+        int vectorBSize = floor(vecteurA.size() / 2);
+        int vectorCSize = floor(vecteurA.size() / 2) + 1;
+        std::vector<int> vectorB(vecteurA.begin(), vecteurA.begin() + vectorBSize);
+        std::vector<int> vectorC(vecteurA.begin(), vecteurA.begin() + vectorCSize);
+        temp1 = algoMin2(vectorB);
+        temp2 = algoMin2(vectorC);
+        std::cout << temp1 << " <=  " << temp2;
+        if (temp1 <= temp2) {
+            return temp1;
+        } else {
+            return temp2;
+        }
+    }
+}
+
+std::vector<int> triABulleV1(std::vector<int> vecteur) {
+    int n = vecteur.size();
+    int temp = 0;
+    for (int i = 0; i <= n - 1; i++) {
+        std::cout << vecteur.at(i) << std::endl;
+    }
+    for (int i = 0; i <= n - 1; i++) {
+        for (int j = 0; j <= n - 2 - i; ++j) {
+            if (vecteur.at(j) > vecteur.at(j + 1)) {
+                temp = vecteur.at(j);
+                vecteur.at(j) = vecteur.at(j + 1);
+                vecteur.at(j + 1) = temp;
+
+            }
+        }
+    }
+    for (int i = 0; i <= n - 1; i++) {
+        std::cout << vecteur.at(i) << std::endl;
+    }
+}
+
+std::vector<int> triABulleV2(std::vector<int> vecteur) {
+    int n = vecteur.size();
+    int temp = 0;
+    for (int i = 0; i <= n - 1; i++) {
+        std::cout << vecteur.at(i) << std::endl;
+    }
+    //Il est nécessaire de faire 2 boucles
+    //Sinon un petit élément à la fin du vecteur ne bougera que d'une seule position.
+    std::cout << "========" << std::endl;
+    for (int i = 0; i <= n - 2; i++) {
+        if (vecteur.at(i) > vecteur.at(i + 1)) {
+            temp = vecteur.at(i);
+            vecteur.at(i) = vecteur.at(i + 1);
+            vecteur.at(i + 1) = temp;
+        }
+
+    }
+    std::cout << "========" << std::endl;
+    for (int i = 0; i <= n - 1; i++) {
+        std::cout << vecteur.at(i) << std::endl;
+    }
+}
+
+
 int main(void) {
 
-    std::cout << " MAIN ICI " << std::endl;
-    //FIN DU VECTEUR : début équation (full gauche) => x^3
-    //DÉBUT DU VECTEUR : fin équation (full droite) => 1
+//    std::vector<int> vectorA = {89, 15, 51, 27, 98};
+//    int res = algoMin1(vectorA);
+//    int res2 = algoMin2(vectorA);
+//    std::cout << "resultat algoMin1 ici : " << res;
+//    std::cout << "resultat algoMin2 ici : " << res2;
+//    test_instance_vue_en_classe();
+//    test_avec_reste_nul();
+//    test_division_par_un_entier();
+//    test_plus_grand_commun_diviseur1();
+//    test_plus_grand_commun_diviseur2();
 
-    //Créatioon des polynomes...
-//    Rationnel coefficients_dividence_a[4] = {Rationnel(1), Rationnel(2), Rationnel(0), Rationnel(4)};
-//    Rationnel coefficients_diviseur_b[3] = {Rationnel(1), Rationnel(0), Rationnel(2)};
-//    std::vector<Rationnel> vec_rationnel_a = std::vector<Rationnel>(coefficients_dividence_a,
-//                                                                    coefficients_dividence_a + 4);
-//    std::vector<Rationnel> vec_rationnel_b = std::vector<Rationnel>(coefficients_diviseur_b,
-//                                                                    coefficients_diviseur_b + 3);
-//    Polynome quotient_a(vec_rationnel_a); // x^3 + 2x + 1
-//    Polynome quotient_b(vec_rationnel_b);//1
+//    Polynome quotient, reste;
+//    Rationnel coefficients_dividende[5] = {Rationnel(-81), Rationnel(0), Rationnel(0), Rationnel(0), Rationnel(1)};
+//    Polynome a(std::vector<Rationnel>(coefficients_dividende, coefficients_dividende + 5)); // x^4 - 81
+//    Polynome b(std::vector<Rationnel>(coefficients_dividende, coefficients_dividende + 5)); // x^4 - 81
+//    division(a, b, quotient, reste);
 
+//    std::vector<int> test = std::vector<int>{3, 2, 4, 1};
+//    triABulleV1(test);
+//    triABulleV2(test);
 
-
-  test_instance_vue_en_classe();
-//  test_avec_reste_nul();
-  //test_division_par_un_entier();
-//  test_plus_grand_commun_diviseur1();
-//  test_plus_grand_commun_diviseur2();
 
 //  // Un autre germe sera utilise lors de la correction
 //  // Aucun polynome de degre superieur a 7 ne sera teste, car il y a un risque de depassement d'entier.
-//  test_statistique(7, 1000, 123, test_generique_division);
+//    test_statistique(7, 1000, 123, test_generique_division);
 //  // Un autre germe sera utilise lors de la correction
 //  // Aucun polynome de degre superieur a 4 ne sera teste, car il y a un risque de depassement d'entier.
-//  test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
+
+//    Rationnel zero = Rationnel(0, 1);
+
+
+    test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
 
     return 0;
 }
+
+
+

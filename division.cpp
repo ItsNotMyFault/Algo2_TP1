@@ -17,6 +17,7 @@ void division(const Polynome &dividende, // Le polynome qui est divise
     Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 1)); //0
     int degreea = polynome_a.degre();
     int initdegreea = polynome_a.degre();
+    int initdegreeb = polynome_b.degre();
     int degreeb = polynome_b.degre();
 
     int i = 0;
@@ -53,6 +54,7 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         i++;
     }
     std::cout << "valeur de initdegreea : " << initdegreea << std::endl;;
+    std::cout << "valeur de initdegreeb : " << initdegreeb << std::endl;;
     std::cout << "valeur de i : " << i << std::endl;;
     for (int i = 0; i < vec_result.size(); i++) {
         quotient = quotient + vec_result.at(i);
@@ -60,7 +62,6 @@ void division(const Polynome &dividende, // Le polynome qui est divise
 
 
 }
-
 
 Polynome plus_grand_commun_diviseur(const Polynome &a, const Polynome &b) {
     assert(a >= b);
@@ -74,14 +75,16 @@ Polynome plus_grand_commun_diviseur(const Polynome &a, const Polynome &b) {
     Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 2)); //0
     Polynome polynome1(std::vector<Rationnel>(rationnel1, rationnel1 + 1)); //1
     bool repeat = true;
-    while (repeat) {
 
+    while (repeat) {
+        ///Pour une raison quelconque, le denominaeur recu en paramètre est = à 0 plus de 50 fois.
         if (denominateur != polynome0) {
             division(numerateur, denominateur, quotient, reste);
         } else {
             quotient = polynome1;
             reste = polynome0;
         }
+
         if (reste.degre() < denominateur.degre() || reste == polynome0) {
             repeat = false;
             pgcd = quotient;
