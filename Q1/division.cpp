@@ -56,9 +56,9 @@ void division(const Polynome &dividende, // Le polynome qui est divise
 //    std::cout << "valeur de initdegreea : " << initdegreea << std::endl;;
 //    std::cout << "valeur de initdegreeb : " << initdegreeb << std::endl;;
 //    std::cout << "valeur de i : " << i << std::endl;;
-//    for (int i = 0; i < vec_result.size(); i++) {
-//        quotient = quotient + vec_result.at(i);
-//    }
+    for (int i = 0; i < vec_result.size(); i++) {
+        quotient = quotient + vec_result.at(i);
+    }
 }
 
 
