@@ -22,46 +22,45 @@ void division(const Polynome &dividende, // Le polynome qui est divise
 
     int i = 0;
     std::vector<Polynome> vec_result;
-    while (degreea >= degreeb) {
+    while (degreea >= degreeb) {//teta(1)
         ///obitent coefficient polynomes.
-        Rationnel coefficientA = polynome_a.coefficient(degreea);
-        Rationnel coefficientB = polynome_b.coefficient(degreeb);
-        if (coefficientB == Rationnel(0)) {
+        Rationnel coefficientA = polynome_a.coefficient(degreea);//teta(1)
+        Rationnel coefficientB = polynome_b.coefficient(degreeb);//teta(1)
+        if (coefficientB == Rationnel(0)) {//teta(1)
             coefficientB = 1;
         }
-        Rationnel coefficientX = coefficientA / coefficientB;
+        Rationnel coefficientX = coefficientA / coefficientB;//teta(1)
 
-        if (coefficientX == 0) {
+        if (coefficientX == 0) {//teta(1)
             coefficientX = Rationnel(1);
         }
         ///Création du polynome multiplicateur.
-        int degreeX = degreea - degreeb;
-        std::vector<Rationnel> vec_rationnels_x(degreeX + 1, Rationnel(0));
+        int degreeX = degreea - degreeb;//teta(1)
+        std::vector<Rationnel> vec_rationnels_x(degreeX + 1, Rationnel(0));//linear container size. teta(n+1)
         vec_rationnels_x[degreeX] = coefficientX;
-        Polynome polynome_x(vec_rationnels_x);
+        Polynome polynome_x(vec_rationnels_x); //teta(1)
 
-        vec_result.push_back(polynome_x);
+        vec_result.push_back(polynome_x);// teta(1)
         ///création du polynome à sosutraire
-        Polynome polynome_a_soustraire = polynome_x * polynome_b;
+        Polynome polynome_a_soustraire = polynome_x * polynome_b;//teta(1)
         ///création polynome restant apprès soustraction
-        Polynome quotientRestant = polynome_a - polynome_a_soustraire;
+        Polynome quotientRestant = polynome_a - polynome_a_soustraire; //teta(1)
         ///Remplace polynome_a par le nouveau. (si pas égale à 0)
         polynome_a = quotientRestant;
         reste = quotientRestant;
         ///update les degrés
-        degreea = polynome_a.degre();
-        degreeb = polynome_b.degre();
+        degreea = polynome_a.degre();//teta(1)
+        degreeb = polynome_b.degre();//teta(1)
         i++;
     }
-    std::cout << "valeur de initdegreea : " << initdegreea << std::endl;;
-    std::cout << "valeur de initdegreeb : " << initdegreeb << std::endl;;
-    std::cout << "valeur de i : " << i << std::endl;;
-    for (int i = 0; i < vec_result.size(); i++) {
-        quotient = quotient + vec_result.at(i);
-    }
-
-
+//    std::cout << "valeur de initdegreea : " << initdegreea << std::endl;;
+//    std::cout << "valeur de initdegreeb : " << initdegreeb << std::endl;;
+//    std::cout << "valeur de i : " << i << std::endl;;
+//    for (int i = 0; i < vec_result.size(); i++) {
+//        quotient = quotient + vec_result.at(i);
+//    }
 }
+
 
 Polynome plus_grand_commun_diviseur(const Polynome &a, const Polynome &b) {
     assert(a >= b);
