@@ -168,19 +168,19 @@ bool test_statistique(unsigned int degre,
   return true;
 }
 
-int main(void) {
-  test_instance_vue_en_classe();
-  test_avec_reste_nul();
-  test_division_par_un_entier();
-  test_plus_grand_commun_diviseur1();
-  test_plus_grand_commun_diviseur2();
-
-  // Un autre germe sera utilise lors de la correction
-  // Aucun polynome de degre superieur a 7 ne sera teste, car il y a un risque de depassement d'entier.
-  test_statistique(7, 1000, 123, test_generique_division); 
-  // Un autre germe sera utilise lors de la correction
-  // Aucun polynome de degre superieur a 4 ne sera teste, car il y a un risque de depassement d'entier.
-  test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
-  
-  return 0;
-}
+//int main(void) {
+//  test_instance_vue_en_classe();
+//  test_avec_reste_nul();
+//  test_division_par_un_entier();
+//  test_plus_grand_commun_diviseur1();
+//  test_plus_grand_commun_diviseur2();
+//
+//  // Un autre germe sera utilise lors de la correction
+//  // Aucun polynome de degre superieur a 7 ne sera teste, car il y a un risque de depassement d'entier.
+//  test_statistique(7, 1000, 123, test_generique_division);
+//  // Un autre germe sera utilise lors de la correction
+//  // Aucun polynome de degre superieur a 4 ne sera teste, car il y a un risque de depassement d'entier.
+//  test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
+//
+//  return 0;
+//}
