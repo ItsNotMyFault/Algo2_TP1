@@ -74,10 +74,12 @@ bool multiplicationVecteursDeUns(unsigned int n, unsigned int m) {
                 GrandEntier(produit));
 }
 
+#include "cmath"
+
 int main(void) {
 //    multiplicationParZero();
 //    std::cout << "=========" << std::endl;
-    multiplicationParUn();
+//    multiplicationParUn();
 //    std::cout << "=========" << std::endl;
 //    multiplicationSimple();
 //    std::cout << "=========" << std::endl;
@@ -85,5 +87,13 @@ int main(void) {
 //    std::cout << "=========" << std::endl;
 //    multiplicationVecteursDeUns(200, 70); // Pour deboguer, essayez avec de plus petites valeurs
 //    std::cout << "=========" << std::endl;
+
+
+    test("ARRRRRRRRRRGH",
+         GrandEntier(1),
+         GrandEntier(42),
+         GrandEntier(42));
+
+
     return 0;
 }

@@ -11,19 +11,17 @@ void division(const Polynome &dividende, // Le polynome qui est divise
     //FIN DU VECTEUR : début équation (full gauche) => x^3
     //DÉBUT DU VECTEUR : fin équation (full droite) => 1
 
-    Polynome polynome_a = dividende;
+    Polynome polynome_a = dividende;//theta(polynome_a.degree)
     Polynome polynome_b = diviseur;
-    Rationnel rationnel0[1] = {Rationnel(0)};
-    Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 1)); //0
-    int degreea = polynome_a.degre();
-    int initdegreea = polynome_a.degre();
-    int initdegreeb = polynome_b.degre();
-    int degreeb = polynome_b.degre();
+    Rationnel rationnel0[1] = {Rationnel(0)};//Theta(1)
+    Polynome polynome0(std::vector<Rationnel>(rationnel0, rationnel0 + 1));//theta(1)
+    int degreea = polynome_a.degre();//Theta(1)
+    int degreeb = polynome_b.degre();//Theta(1)
 
     int i = 0;
     std::vector<Polynome> vec_result;
     while (degreea >= degreeb) {//teta(1)
-        ///obitent coefficient polynomes.
+        ///obtient coefficient polynomes.
         Rationnel coefficientA = polynome_a.coefficient(degreea);//teta(1)
         Rationnel coefficientB = polynome_b.coefficient(degreeb);//teta(1)
         if (coefficientB == Rationnel(0)) {//teta(1)
@@ -36,15 +34,17 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         }
         ///Création du polynome multiplicateur.
         int degreeX = degreea - degreeb;//teta(1)
-        std::vector<Rationnel> vec_rationnels_x(degreeX + 1, Rationnel(0));//linear container size. teta(n+1)
+        //Construction d'un vecteur se fait en temps linéaire selon la soustraction des degrés des 2 polynomes
+        //Toutefois la construction du vecteur est négligeable comparer au reste de l'algorithme.
+        std::vector<Rationnel> vec_rationnels_x(degreeX + 1, Rationnel(0));//linear container size. teta(degreeX)
         vec_rationnels_x[degreeX] = coefficientX;
         Polynome polynome_x(vec_rationnels_x); //teta(1)
-
+        std::cout << std::endl << polynome_x << std::endl;
         vec_result.push_back(polynome_x);// teta(1)
         ///création du polynome à sosutraire
-        Polynome polynome_a_soustraire = polynome_x * polynome_b;//teta(1)
+        Polynome polynome_a_soustraire = polynome_x * polynome_b;//teta(degreeX^2)
         ///création polynome restant apprès soustraction
-        Polynome quotientRestant = polynome_a - polynome_a_soustraire; //teta(1)
+        Polynome quotientRestant = polynome_a - polynome_a_soustraire; //teta(degreea + degreePolyASoustraire)
         ///Remplace polynome_a par le nouveau. (si pas égale à 0)
         polynome_a = quotientRestant;
         reste = quotientRestant;
@@ -53,10 +53,8 @@ void division(const Polynome &dividende, // Le polynome qui est divise
         degreeb = polynome_b.degre();//teta(1)
         i++;
     }
-//    std::cout << "valeur de initdegreea : " << initdegreea << std::endl;;
-//    std::cout << "valeur de initdegreeb : " << initdegreeb << std::endl;;
-//    std::cout << "valeur de i : " << i << std::endl;;
-    for (int i = 0; i < vec_result.size(); i++) {
+    std::cout << "valeur de i : " << i << std::endl;;
+    for (int i = 0; i < vec_result.size(); i++) {//theta(vec_result.size())
         quotient = quotient + vec_result.at(i);
     }
 }
