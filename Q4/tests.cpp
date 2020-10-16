@@ -77,7 +77,7 @@ bool multiplicationVecteursDeUns(unsigned int n, unsigned int m) {
 
 #include "cmath"
 
-int main(void) {
+//int main(void) {
 //    multiplicationParZero();
 //    std::cout << "=========" << std::endl;
 //    multiplicationParUn();
@@ -88,12 +88,6 @@ int main(void) {
 //    std::cout << "=========" << std::endl;
 //    multiplicationVecteursDeUns(200, 70); // Pour deboguer, essayez avec de plus petites valeurs
 //    std::cout << "=========" << std::endl;
-
-    test("Multiplication de 15*15",
-         GrandEntier(8),
-         GrandEntier(1),
-         GrandEntier(8));
-//21, 15x15
-//7, 8x1
-    return 0;
-}
+//
+//    return 0;
+//}

@@ -180,47 +180,47 @@ void algorithm(int a, int b) {
     }
 }
 
-//int main(void) {
-//  test_instance_vue_en_classe();
-//  test_avec_reste_nul();
-//  test_division_par_un_entier();
-//  test_plus_grand_commun_diviseur1();
-//  test_plus_grand_commun_diviseur2();
-//
-//  // Un autre germe sera utilise lors de la correction
-//  // Aucun polynome de degre superieur a 7 ne sera teste, car il y a un risque de depassement d'entier.
-//  test_statistique(7, 1000, 123, test_generique_division);
-//  // Un autre germe sera utilise lors de la correction
-//  // Aucun polynome de degre superieur a 4 ne sera teste, car il y a un risque de depassement d'entier.
-//  test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
+int main(void) {
+  test_instance_vue_en_classe();
+  test_avec_reste_nul();
+  test_division_par_un_entier();
+  test_plus_grand_commun_diviseur1();
+  test_plus_grand_commun_diviseur2();
 
-//    Rationnel coefficients_a[9] = {Rationnel(-4), Rationnel(0), Rationnel(0), Rationnel(0), Rationnel(0), Rationnel(0),
-//                                   Rationnel(0), Rationnel(2)}; // x^7 - 4
+  // Un autre germe sera utilise lors de la correction
+  // Aucun polynome de degre superieur a 7 ne sera teste, car il y a un risque de depassement d'entier.
+  test_statistique(7, 1000, 123, test_generique_division);
+  // Un autre germe sera utilise lors de la correction
+  // Aucun polynome de degre superieur a 4 ne sera teste, car il y a un risque de depassement d'entier.
+  test_statistique(4, 1000, 321, test_generique_plus_grand_commun_diviseur);
 
-//    Rationnel coefficients_b[4] = {Rationnel(2), Rationnel(0), Rationnel(0), Rationnel(1)}; // x^3 + 2
-//    Polynome a(std::vector<Rationnel>(coefficients_a, coefficients_a + 8));
-//    Polynome b(std::vector<Rationnel>(coefficients_b, coefficients_b + 4));
-//    Polynome q, r;
-//    division(a, b, q, r);
-//    std::cout << "a : " << a << std::endl;;
-//    std::cout << "b : " << b << std::endl;;
-//    std::cout << "q : " << q << std::endl;;
-//    std::cout << "r : " << r << std::endl;;
-//
-//    int m = 9;
-//    int n = 2;
-//    for (int i = 0; i < m; i++) {
-//        int k =0;
-//        m = m - n;
-//        while(k < m){
-//            std::cout << "complexity of this algorithm?";
-//        }
-//
-//    }
+    Rationnel coefficients_a[9] = {Rationnel(-4), Rationnel(0), Rationnel(0), Rationnel(0), Rationnel(0), Rationnel(0),
+                                   Rationnel(0), Rationnel(2)}; // x^7 - 4
 
-//    algorithm(7, 2);
-//    return 0;
-//}
+    Rationnel coefficients_b[4] = {Rationnel(2), Rationnel(0), Rationnel(0), Rationnel(1)}; // x^3 + 2
+    Polynome a(std::vector<Rationnel>(coefficients_a, coefficients_a + 8));
+    Polynome b(std::vector<Rationnel>(coefficients_b, coefficients_b + 4));
+    Polynome q, r;
+    division(a, b, q, r);
+    std::cout << "a : " << a << std::endl;;
+    std::cout << "b : " << b << std::endl;;
+    std::cout << "q : " << q << std::endl;;
+    std::cout << "r : " << r << std::endl;;
+
+    int m = 9;
+    int n = 2;
+    for (int i = 0; i < m; i++) {
+        int k =0;
+        m = m - n;
+        while(k < m){
+            std::cout << "complexity of this algorithm?";
+        }
+
+    }
+
+    algorithm(7, 2);
+    return 0;
+}
 
 
 
