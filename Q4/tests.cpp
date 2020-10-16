@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <iostream>
+#include <cmath>
 
 bool
 test(const std::string &nom_du_test, const GrandEntier &a, const GrandEntier &b, const GrandEntier &produit_attendu) {
@@ -91,8 +92,35 @@ int main(void) {
 
     test("ARRRRRRRRRRGH",
          GrandEntier(1),
-         GrandEntier(42),
-         GrandEntier(42));
+         GrandEntier(6),
+         GrandEntier(3));
+
+//    double gg = (1.0/2.0);
+//    double ceilResult = ceil(gg);
+//    double floorResult = floor(gg);
+//
+//    double gg2 = (0.5);
+//    double ceilResult2 = std::ceil(gg2);
+//    double floorResult2 = std::floor(gg2);
+
+
+
+//    GrandEntier ff = GrandEntier(6);
+//    std::vector<bool> A = ff.m_bits;
+//    int m = A.size();
+//
+//    GrandEntier m1, m2, m3, additionA, additionB, opZ;
+//    int half_sizeA = floor(m / 2.0);
+//    ///Splits vector A in 2.
+//    std::vector<bool> a_Inf(A.begin(), A.begin() + half_sizeA);
+//    std::vector<bool> a_Sup(A.begin() + half_sizeA, A.end());
+//    GrandEntier ge_A, ge_a_inf, ge_a_sup;
+//    ge_A = GrandEntier(A);
+//    ge_a_inf = GrandEntier(a_Inf);
+//    ge_a_sup = GrandEntier(a_Sup);
+//    std::cout << "A x B : " << ge_A.toString() << std::endl;
+//    std::cout << "GE_A_MOINS : " << ge_a_inf.toString() << std::endl;
+//    std::cout << "GE_A_PLUS : " << ge_a_sup.toString() << std::endl;
 
 
     return 0;

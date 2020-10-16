@@ -5,8 +5,6 @@
 #include <vector>
 
 class GrandEntier {
-private:
-  std::vector<bool> m_bits;
 public:
   // Construit un GrandEntier a partir d'un entier non signe
   GrandEntier(unsigned int petit_entier = 0);
@@ -25,6 +23,8 @@ public:
   GrandEntier operator+(const GrandEntier& grand_entier) const;
   GrandEntier operator-(const GrandEntier& grand_entier) const;
   GrandEntier operator*(const GrandEntier& grand_entier) const;
+
+    std::vector<bool> m_bits;
 };
 
 #endif
