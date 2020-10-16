@@ -86,9 +86,14 @@ int main(void) {
 //    std::cout << "=========" << std::endl;
 //    multiplicationLongue(100); // Pour deboguer, essayez avec la valeur 10 plutot que 100
 //    std::cout << "=========" << std::endl;
-    multiplicationVecteursDeUns(200, 70); // Pour deboguer, essayez avec de plus petites valeurs
+//    multiplicationVecteursDeUns(200, 70); // Pour deboguer, essayez avec de plus petites valeurs
 //    std::cout << "=========" << std::endl;
 
-
+    test("Multiplication de 15*15",
+         GrandEntier(8),
+         GrandEntier(1),
+         GrandEntier(8));
+//21, 15x15
+//7, 8x1
     return 0;
 }
